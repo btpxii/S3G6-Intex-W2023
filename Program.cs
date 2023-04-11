@@ -1,14 +1,19 @@
 using Intex2.Data;
+using Intex2.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var authConnectionString = builder.Configuration.GetConnectionString("AuthenticationConnection");
+var dataConnectionString = builder.Configuration.GetConnectionString("MummiesConnection");
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(connectionString));
+    options.UseNpgsql(authConnectionString));
+
+builder.Services.AddDbContext<MummiesDbContext>(options =>
+    options.UseNpgsql(dataConnectionString));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
