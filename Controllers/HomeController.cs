@@ -6,12 +6,11 @@ namespace Intex2.Controllers
 {
     public class HomeController : Controller
     {
-        private MummiesDbContext context { get; set; }
-        private readonly ILogger<HomeController> _logger;
+        private IIntex2Repository repo;
 
-        public HomeController(MummiesDbContext temp)
+        public HomeController (IIntex2Repository x)
         {
-            context = temp;
+            repo = x;
         }
 
         public IActionResult Index()
@@ -26,8 +25,8 @@ namespace Intex2.Controllers
 
         public IActionResult BurialList()
         {
-            var blah = context.Burialmains.ToList();
-            return View(blah);
+            var burials = repo.Burialmains.ToList();
+            return View(burials);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

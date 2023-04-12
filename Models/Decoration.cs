@@ -7,6 +7,6 @@ namespace Intex2.Models
     {
         public long Id { get; set; }
         public int? Decorationid { get; set; }
-        public string Value { get; set; }
+        public string? Value { get; set; }
     }
 }

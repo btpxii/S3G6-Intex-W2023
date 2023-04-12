@@ -35,6 +35,8 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddScoped<IIntex2Repository, EFIntex2Repository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

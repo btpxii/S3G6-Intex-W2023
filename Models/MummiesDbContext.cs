@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
+
+// Mission09-06 says to remove everything after DbSet is established, remove virtual from DbSet establishment, partial from mummiesdbcontext establishment
 namespace Intex2.Models
 {
     public partial class MummiesDbContext : DbContext
@@ -16,42 +18,42 @@ namespace Intex2.Models
         {
         }
 
-        public virtual DbSet<Analysis> Analyses { get; set; }
-        public virtual DbSet<AnalysisTextile> AnalysisTextiles { get; set; }
-        public virtual DbSet<Artifactfagelgamousregister> Artifactfagelgamousregisters { get; set; }
-        public virtual DbSet<ArtifactfagelgamousregisterBurialmain> ArtifactfagelgamousregisterBurialmains { get; set; }
-        public virtual DbSet<Artifactkomaushimregister> Artifactkomaushimregisters { get; set; }
-        public virtual DbSet<ArtifactkomaushimregisterBurialmain> ArtifactkomaushimregisterBurialmains { get; set; }
-        public virtual DbSet<Biological> Biologicals { get; set; }
-        public virtual DbSet<BiologicalC14> BiologicalC14s { get; set; }
-        public virtual DbSet<Bodyanalysischart> Bodyanalysischarts { get; set; }
-        public virtual DbSet<Book> Books { get; set; }
-        public virtual DbSet<Burialmain> Burialmains { get; set; }
-        public virtual DbSet<BurialmainBiological> BurialmainBiologicals { get; set; }
-        public virtual DbSet<BurialmainBodyanalysischart> BurialmainBodyanalysischarts { get; set; }
-        public virtual DbSet<BurialmainCranium> BurialmainCrania { get; set; }
-        public virtual DbSet<BurialmainTextile> BurialmainTextiles { get; set; }
-        public virtual DbSet<C14> C14s { get; set; }
-        public virtual DbSet<Color> Colors { get; set; }
-        public virtual DbSet<ColorTextile> ColorTextiles { get; set; }
-        public virtual DbSet<Completebodyanalysischart> Completebodyanalysischarts { get; set; }
-        public virtual DbSet<Cranium> Crania { get; set; }
-        public virtual DbSet<Decoration> Decorations { get; set; }
-        public virtual DbSet<DecorationTextile> DecorationTextiles { get; set; }
-        public virtual DbSet<Dimension> Dimensions { get; set; }
-        public virtual DbSet<DimensionTextile> DimensionTextiles { get; set; }
-        public virtual DbSet<Newsarticle> Newsarticles { get; set; }
-        public virtual DbSet<PhotodataTextile> PhotodataTextiles { get; set; }
-        public virtual DbSet<Photodatum> Photodata { get; set; }
-        public virtual DbSet<Photoform> Photoforms { get; set; }
-        public virtual DbSet<Structure> Structures { get; set; }
-        public virtual DbSet<StructureTextile> StructureTextiles { get; set; }
-        public virtual DbSet<Teammember> Teammembers { get; set; }
-        public virtual DbSet<Textile> Textiles { get; set; }
-        public virtual DbSet<Textilefunction> Textilefunctions { get; set; }
-        public virtual DbSet<TextilefunctionTextile> TextilefunctionTextiles { get; set; }
-        public virtual DbSet<Yarnmanipulation> Yarnmanipulations { get; set; }
-        public virtual DbSet<YarnmanipulationTextile> YarnmanipulationTextiles { get; set; }
+        public virtual DbSet<Analysis> Analyses { get; set; } = null!;
+        public virtual DbSet<AnalysisTextile> AnalysisTextiles { get; set; } = null!;
+        public virtual DbSet<Artifactfagelgamousregister> Artifactfagelgamousregisters { get; set; } = null!;
+        public virtual DbSet<ArtifactfagelgamousregisterBurialmain> ArtifactfagelgamousregisterBurialmains { get; set; } = null!;
+        public virtual DbSet<Artifactkomaushimregister> Artifactkomaushimregisters { get; set; } = null!;
+        public virtual DbSet<ArtifactkomaushimregisterBurialmain> ArtifactkomaushimregisterBurialmains { get; set; } = null!;
+        public virtual DbSet<Biological> Biologicals { get; set; } = null!;
+        public virtual DbSet<BiologicalC14> BiologicalC14s { get; set; } = null!;
+        public virtual DbSet<Bodyanalysischart> Bodyanalysischarts { get; set; } = null!;
+        public virtual DbSet<Book> Books { get; set; } = null!;
+        public virtual DbSet<Burialmain> Burialmains { get; set; } = null!;
+        public virtual DbSet<BurialmainBiological> BurialmainBiologicals { get; set; } = null!;
+        public virtual DbSet<BurialmainBodyanalysischart> BurialmainBodyanalysischarts { get; set; } = null!;
+        public virtual DbSet<BurialmainCranium> BurialmainCrania { get; set; } = null!;
+        public virtual DbSet<BurialmainTextile> BurialmainTextiles { get; set; } = null!;
+        public virtual DbSet<C14> C14s { get; set; } = null!;
+        public virtual DbSet<Color> Colors { get; set; } = null!;
+        public virtual DbSet<ColorTextile> ColorTextiles { get; set; } = null!;
+        public virtual DbSet<Completebodyanalysischart> Completebodyanalysischarts { get; set; } = null!;
+        public virtual DbSet<Cranium> Crania { get; set; } = null!;
+        public virtual DbSet<Decoration> Decorations { get; set; } = null!;
+        public virtual DbSet<DecorationTextile> DecorationTextiles { get; set; } = null!;
+        public virtual DbSet<Dimension> Dimensions { get; set; } = null!;
+        public virtual DbSet<DimensionTextile> DimensionTextiles { get; set; } = null!;
+        public virtual DbSet<Newsarticle> Newsarticles { get; set; } = null!;
+        public virtual DbSet<PhotodataTextile> PhotodataTextiles { get; set; } = null!;
+        public virtual DbSet<Photodatum> Photodata { get; set; } = null!;
+        public virtual DbSet<Photoform> Photoforms { get; set; } = null!;
+        public virtual DbSet<Structure> Structures { get; set; } = null!;
+        public virtual DbSet<StructureTextile> StructureTextiles { get; set; } = null!;
+        public virtual DbSet<Teammember> Teammembers { get; set; } = null!;
+        public virtual DbSet<Textile> Textiles { get; set; } = null!;
+        public virtual DbSet<Textilefunction> Textilefunctions { get; set; } = null!;
+        public virtual DbSet<TextilefunctionTextile> TextilefunctionTextiles { get; set; } = null!;
+        public virtual DbSet<Yarnmanipulation> Yarnmanipulations { get; set; } = null!;
+        public virtual DbSet<YarnmanipulationTextile> YarnmanipulationTextiles { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -677,12 +679,10 @@ namespace Intex2.Models
                 entity.Property(e => e.Bodykey).HasColumnName("bodykey");
 
                 entity.Property(e => e.Area)
-                    .IsRequired()
                     .HasColumnType("character varying")
                     .HasColumnName("area");
 
                 entity.Property(e => e.Burialnumber)
-                    .IsRequired()
                     .HasColumnType("character varying")
                     .HasColumnName("burialnumber");
 
@@ -697,7 +697,6 @@ namespace Intex2.Models
                     .HasColumnName("dorsalpitting");
 
                 entity.Property(e => e.Eastwest)
-                    .IsRequired()
                     .HasColumnType("character varying")
                     .HasColumnName("eastwest");
 
@@ -746,7 +745,6 @@ namespace Intex2.Models
                     .HasColumnName("medial_ip_ramus");
 
                 entity.Property(e => e.Northsouth)
-                    .IsRequired()
                     .HasColumnType("character varying")
                     .HasColumnName("northsouth");
 
@@ -803,12 +801,10 @@ namespace Intex2.Models
                     .HasColumnName("squamossuture");
 
                 entity.Property(e => e.Squareeastwest)
-                    .IsRequired()
                     .HasColumnType("character varying")
                     .HasColumnName("squareeastwest");
 
                 entity.Property(e => e.Squarenorthsouth)
-                    .IsRequired()
                     .HasColumnType("character varying")
                     .HasColumnName("squarenorthsouth");
 
