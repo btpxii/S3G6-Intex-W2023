@@ -1,22 +1,28 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<header class="py-5 bg-image-full" style="background-image: url('lib/img/sand.jpg')">
-    <div class="text-center my-5">
-        <h1 class="text-white fs-3 fw-bolder">Fag el-Gamous</h1>
-        <p class="text-white-50 mb-0">Way of the Water Buffalo</p>
+
+<header class="py-5 image-container">
+    <img src="lib/img/sand.jpg" class="img-fluid" alt="Fag el-Gamous">
+    <div class="bg-image-full text-overlay">
+        <div class="text-center my-5">
+            <h1 class="text-white fs-3 fw-bolder">Fag el-Gamous</h1>
+            <p class="text-white-50 mb-0">Way of the Water Buffalo</p>
+        </div>
     </div>
 </header>
 <section class="py-5">
     <div class="container my-5">
         <div class="row justify-content-center">
             <p>
+                Un-ChatGPTify BEFORE SUBMITTING<br />
                 Fag el-Gamous is a famous 125hectare Graeco-roman necropolis on the eastern edge of the Fayoum Depression. There are
-                approximately 1000+ burials excavated at the cemetry. There is a high burial density, because of the graves are 0.3-3.0m deep.
+                approximately 1000+ burials excavated at the cemetry. There is a high burial density, with graves that are 0.3-3.0m deep.
                 With the large amount of remains found, there has been a lot of data collected from these mummies. The dig site is organized in a grid system
                 using coordinates North(N), East(E), South(S), and West(W). These then individual squares are divided into another square, so an example of a burial
                 location is N 190/200 E 40/50 SE #9 (usually there are multiple remains found in one subsquare, so the remains are numbered).
             </p>
+            <a class="btn btn-lg btn-outline-dark" asp-controller="Home" asp-action="BurialList">View Data</a>
         </div>
     </div>
 </section>

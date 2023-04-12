@@ -21,6 +21,14 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddRazorPages();
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    // This lambda determines whether user consent for non-essential 
+    // cookies is needed for a given request.
+    options.CheckConsentNeeded = context => true;
+
+    options.MinimumSameSitePolicy = SameSiteMode.None;
+});
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
@@ -53,6 +61,14 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseCookiePolicy();
+
+app.Use(async (ctx, next) =>
+{
+    // I have to enable unsafe-inline for style-src and script-src to allow the change email functionality to work properly. I fully understand the vulnerability that this exposes, and in a real-world situation I would research further to understand how I can have both security and functionality.
+    ctx.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://stackpath.bootstrapcdn.com; script-src 'self' 'unsafe-inline' https://code.jquery.com https://stackpath.bootstrapcdn.com");
+    await next();
+});
 
 app.UseRouting();
 

@@ -16,3 +16,26 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.image-container {
+    position: relative;
+}
+
+.text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+#cookieConsent {
+    position: fixed;
+    right: 15px;
+    left: 15px;
+}
