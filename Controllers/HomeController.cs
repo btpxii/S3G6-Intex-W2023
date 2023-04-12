@@ -6,11 +6,12 @@ namespace Intex2.Controllers
 {
     public class HomeController : Controller
     {
+        private MummiesDbContext context { get; set; }
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(MummiesDbContext temp)
         {
-            _logger = logger;
+            context = temp;
         }
 
         public IActionResult Index()
@@ -21,6 +22,12 @@ namespace Intex2.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public IActionResult BurialList()
+        {
+            var blah = context.Burialmains.ToList();
+            return View(blah);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
