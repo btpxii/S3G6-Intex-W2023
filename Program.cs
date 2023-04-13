@@ -92,6 +92,14 @@ app.Use(async (ctx, next) =>
 {
     // I have to enable unsafe-inline for style-src and script-src to allow the change email functionality to work properly. I fully understand the vulnerability that this exposes, and in a real-world situation I would research further to understand how I can have both security and functionality.
     ctx.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://stackpath.bootstrapcdn.com; script-src 'self' 'unsafe-inline' https://code.jquery.com https://stackpath.bootstrapcdn.com https://cdnjs.cloudflare.com");
+
+    ctx .Request.Scheme = "https";
+
+    ctx.Response.Headers.Add("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload");
+    ctx.Response.Headers.Add("X-Frame-Options", "SAMEORIGIN");
+    ctx.Response.Headers.Add("X-Content-Type-Options", "nosniff");
+    ctx.Response.Headers.Add("Referrer-Policy", "strict-origin-when-cross-origin");
+    ctx.Response.Headers.Remove("Server");
     await next();
 });
 
