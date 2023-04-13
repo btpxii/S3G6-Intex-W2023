@@ -55,6 +55,16 @@ namespace Intex2.Controllers
             return View(x);
         }
 
+        public IActionResult Prediction()
+        {
+            return View();
+        }
+
+        public IActionResult Visualization()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
