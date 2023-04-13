@@ -1,5 +1,7 @@
-using Intex2.Data;
+using Intex2.Areas.Identity.Data;
+using Intex2.Core;
 using Intex2.Models;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,17 +19,32 @@ builder.Services.AddDbContext<MummiesDbContext>(options =>
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddRazorPages();
+
+builder.Services.AddHsts(options =>
+{
+    options.Preload = true;
+    options.IncludeSubDomains = true;
+    options.MaxAge = TimeSpan.FromDays(60);
+});
+
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders =
+        ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+});
+
 builder.Services.Configure<CookiePolicyOptions>(options =>
 {
     // This lambda determines whether user consent for non-essential 
     // cookies is needed for a given request.
     options.CheckConsentNeeded = context => true;
-
-    options.MinimumSameSitePolicy = SameSiteMode.None;
+    options.Secure = CookieSecurePolicy.Always;
+    options.MinimumSameSitePolicy = SameSiteMode.Strict;
 });
 
 builder.Services.Configure<IdentityOptions>(options =>
@@ -43,9 +60,17 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 builder.Services.AddControllersWithViews();
 
+#region Authorization
+
+AddAuthorizationPolicies();
+
+#endregion
+
 builder.Services.AddScoped<IIntex2Repository, EFIntex2Repository>();
 
 var app = builder.Build();
+
+app.UseForwardedHeaders();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -66,7 +91,7 @@ app.UseCookiePolicy();
 app.Use(async (ctx, next) =>
 {
     // I have to enable unsafe-inline for style-src and script-src to allow the change email functionality to work properly. I fully understand the vulnerability that this exposes, and in a real-world situation I would research further to understand how I can have both security and functionality.
-    ctx.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://stackpath.bootstrapcdn.com; script-src 'self' 'unsafe-inline' https://code.jquery.com https://stackpath.bootstrapcdn.com");
+    ctx.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://stackpath.bootstrapcdn.com; script-src 'self' 'unsafe-inline' https://code.jquery.com https://stackpath.bootstrapcdn.com https://cdnjs.cloudflare.com");
     await next();
 });
 
@@ -74,10 +99,49 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "directionpage",
+        pattern: "{direction}/Page{pageNum}",
+        defaults: new { Controller = "Home", action = "BurialList" });
+    endpoints.MapControllerRoute(
+        name: "Paging",
+        pattern: "Home/BurialList/{pageNum}",
+        defaults: new { Controller = "Home", action = "BurialList", pageNum = 1 });
+    endpoints.MapControllerRoute(
+        name: "direction",
+        pattern: "{direction}",
+        defaults: new { Controller = "Home", action = "BurialList" });
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    endpoints.MapDefaultControllerRoute();
+
+    endpoints.MapRazorPages();
+
+
+});
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
 app.Run();
+
+void AddAuthorizationPolicies()
+{
+    builder.Services.AddAuthorization(options =>
+    {
+        options.AddPolicy(Constants.Policies.RequireAdmin, policy => policy.RequireRole(Constants.Roles.Administrator));
+    });
+
+    builder.Services.AddAuthorization(options =>
+    {
+        options.AddPolicy(Constants.Policies.RequireResearcher, policy => policy.RequireRole(Constants.Roles.Researcher));
+    });
+
+    builder.Services.AddAuthorization(options =>
+    {
+        options.AddPolicy(Constants.Policies.RequireUser, policy => policy.RequireRole(Constants.Roles.User));
+    });
+
+}

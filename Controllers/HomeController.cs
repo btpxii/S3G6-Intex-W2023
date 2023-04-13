@@ -1,6 +1,10 @@
-﻿using Intex2.Models;
+﻿using Intex2.Core;
+using Intex2.Models;
+using Intex2.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+
 
 namespace Intex2.Controllers
 {
@@ -8,9 +12,9 @@ namespace Intex2.Controllers
     {
         private IIntex2Repository repo;
 
-        public HomeController (IIntex2Repository x)
+        public HomeController(IIntex2Repository temp)
         {
-            repo = x;
+            repo = temp;
         }
 
         public IActionResult Index()
@@ -23,10 +27,32 @@ namespace Intex2.Controllers
             return View();
         }
 
-        public IActionResult BurialList()
+        public IActionResult BurialList(string direction, string dage, int pageNum = 1)
         {
-            var burials = repo.Burialmains.ToList();
-            return View(burials);
+            int pageSize = 10;
+
+            var x = new BurialsViewModel
+            {
+                Burialmains = repo.Burialmains
+                .Where(b =>
+                (b.Headdirection == direction || direction == null) &&
+                (dage == null || b.Ageatdeath == dage))
+                .OrderBy(b => b.Dateofexcavation)
+                .Skip((pageNum - 1) * pageSize)
+                .Take(pageSize),
+
+                PageInfo = new PageInfo
+                {
+                    TotalNumBurials = repo.Burialmains
+                        .Count(b =>
+                        (direction == null || b.Headdirection == direction) &&
+                        (dage == null || b.Ageatdeath == dage)),
+                    BurialsPerPage = pageSize,
+                    CurrentPage = pageNum
+                }
+            };
+
+            return View(x);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

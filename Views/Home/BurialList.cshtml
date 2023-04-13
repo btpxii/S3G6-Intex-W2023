@@ -1,9 +1,24 @@
 ﻿@{
+    ViewData["Title"] = "Burial List";
 }
 
-@model List<Burialmain>
+@model BurialsViewModel
+<div class="row m-1 p-1">
+    <div id="headDirection" class="col-3">FILTER</div>
+    <vc:direction></vc:direction>
+    <vc:dage></vc:dage>
+    <vc:hair></vc:hair>
+</div>
 
-@foreach (Burialmain b in Model)
-{
-    <p>@b.Id</p>
-}
+<div class="col-9"></div>
+<div>
+    @foreach (Burialmain b in Model.Burialmains)
+    {
+        <partial name="_BurialSummaryPartial" model="b" />
+
+    }
+</div>
+
+<div page-blah="@Model.PageInfo" page-action="BurialList" page-class="btn"
+     page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
+     page-class-enabled=true class="btn group pull-right m-1"></div>
