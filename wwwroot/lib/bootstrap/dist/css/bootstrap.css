@@ -123,6 +123,21 @@ h2, .h2 {
 h3, .h3 {
   font-size: calc(1.3rem + 0.6vw);
 }
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex-grow: 1;
+    margin-top: 100px; /* Change this to the height of your footer */
+}
+
+footer {
+    flex-shrink: 0;
+}
 @media (min-width: 1200px) {
   h3, .h3 {
     font-size: 1.75rem;

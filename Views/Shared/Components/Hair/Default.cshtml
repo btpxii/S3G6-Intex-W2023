@@ -1,0 +1,18 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<string>
+
+<a asp-controller="Home" asp-action="BurialList" asp-rotue-hair="">Burial Home List</a>
+<form asp-controller="Home" asp-action="BurialList" method="get">
+    <select name="hair" onchange="this.form.submit()">
+        <option value="">All Hair Colors</option>
+        @foreach (string t in Model)
+        {
+            <option value="@t">@t</option>
+        }
+
+    </select>
+</form>

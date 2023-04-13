@@ -9,9 +9,9 @@ namespace Intex2.Models
     {
         private MummiesDbContext context { get; set; }
 
-        public EFIntex2Repository(MummiesDbContext x)
+        public EFIntex2Repository(MummiesDbContext temp)
         {
-            context = x;
+            context = temp;
         }
 
         public IQueryable<Burialmain> Burialmains => context.Burialmains;

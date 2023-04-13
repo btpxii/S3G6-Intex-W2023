@@ -74,10 +74,28 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "directionpage",
+        pattern: "{direction}/Page{pageNum}",
+        defaults: new { Controller = "Home", action = "BurialList" });
+    endpoints.MapControllerRoute(
+        name: "Paging",
+        pattern: "{pageNum}",
+        defaults: new { Controller = "Home", action = "BurialList" });
+    endpoints.MapControllerRoute(
+        name: "direction",
+        pattern: "{direction}",
+        defaults: new { Controller = "Home", action = "BurialList" });
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    endpoints.MapDefaultControllerRoute();
+
+    endpoints.MapRazorPages();
+    
+
+});
+
+
 app.MapRazorPages();
-
 app.Run();
