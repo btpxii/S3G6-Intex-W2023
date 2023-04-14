@@ -117,10 +117,10 @@ app.UseEndpoints(endpoints =>
         name: "Paging",
         pattern: "Home/BurialList/{pageNum}",
         defaults: new { Controller = "Home", action = "BurialList", pageNum = 1 });
-    endpoints.MapControllerRoute(
-        name: "direction",
-        pattern: "{direction}",
-        defaults: new { Controller = "Home", action = "BurialList" });
+    //endpoints.MapControllerRoute(
+    //    name: "direction",
+    //    pattern: "{direction}",
+    //    defaults: new { Controller = "Home", action = "BurialList" });
 
     endpoints.MapDefaultControllerRoute();
 
