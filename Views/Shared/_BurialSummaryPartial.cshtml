@@ -7,6 +7,12 @@
             @Model.Id
         </h4>
     </div>
+    <form method="get" asp-controller="Home" asp-action="BurialDetail">
+        <input type="hidden" asp-for="@Model.Burialnumber" />
+        <span class="card-text">
+            <button type="submit" class="btn btn-success btn-sm" style="float:right">View Details</button>
+        </span>
+    </form>
     <div class="card-text p-1">Area: @Model.Area</div>
     <div class="card-text p-1">Burial Number: @Model.Burialnumber</div>
     <div class="card-text p-1">Age at Death: @Model.Ageatdeath</div>
@@ -18,11 +24,8 @@
     <div class="card-text p-1">Square East West: @Model.Squareeastwest</div>
     <div class="card-text p-1">Sex: @Model.Sex</div>
     <div class="card-text p-1">Square North South: @Model.Squarenorthsouth</div>
-    <form method="get" asp-controller="Home" asp-action="BurialDetail">
-        <input type="hidden" asp-for="@Model.Burialnumber" />
-        <span class="card-text">
-            <button type="submit" class="btn btn-success btn-sm float-end">View Details</button>
-        </span>
-    </form>
+
+    <a asp-controller="Home" asp-action="BurialEdit" asp-route-burialid="@Model.Id" class="btn btn-warning btn-sm float-end">Edit</a>
+    <a asp-controller="Home" asp-action="BurialDelete" asp-route-burialid="@Model.Id" class="btn btn-danger btn-sm float-end">Delete</a>
 </div>
 <br />

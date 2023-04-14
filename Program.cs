@@ -117,7 +117,10 @@ app.UseEndpoints(endpoints =>
         name: "BurialsFilterPagination",
         pattern: "Home/BurialList/{pageNum}/{slug}",
         defaults: new { Controller = "Home", action = "BurialList" });
-
+    endpoints.MapControllerRoute(
+        name: "EditBurial",
+        pattern: "Home/BurialEdit/{burialId}",
+        defaults: new { Controller = "Home", action = "BurialEdit" });
 
     endpoints.MapDefaultControllerRoute();
 

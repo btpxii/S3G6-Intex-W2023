@@ -92,12 +92,26 @@ namespace Intex2.Controllers
         [HttpGet]
         public IActionResult BurialDetail(string burialnumber)
         {
-            var burial = repo.Burialmains.Where(b => b.Burialnumber == burialnumber).FirstOrDefault();
+            var burial = repo.Burialmains
+                .Where(b => b.Burialnumber == burialnumber).FirstOrDefault();
             if (burial == null)
             {
                 return NotFound();
             }
             return View(burial);
+        }
+
+        [Authorize(Roles = "Researcher, Administrator")]
+        public IActionResult BurialEdit (long burialId)
+        {
+            var burial = repo.Burialmains.Where(x => x.Id == burialId).FirstOrDefault();
+            return View(burial);
+        }
+
+        [Authorize(Roles = "Researcher, Administrator")]
+        public IActionResult BurialDelete()
+        {
+            return View();
         }
 
         public IActionResult Prediction()
