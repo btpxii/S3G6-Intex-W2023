@@ -5,7 +5,7 @@ namespace Intex2.Components
 {
     public class BnumViewComponent : ViewComponent
     {
-
+        // View component that builds the bnum filter for buriallist
         private IIntex2Repository repo { get; set; }
         public BnumViewComponent(IIntex2Repository temp)
         {
@@ -15,7 +15,7 @@ namespace Intex2.Components
         public IViewComponentResult Invoke()
         {
 
-
+            // Filters bnums down to distinct, non-null values
             var bnum = repo.Burialmains
                 .Where(x => !string.IsNullOrWhiteSpace(x.Burialnumber))
                 .Select(x => x.Burialnumber)

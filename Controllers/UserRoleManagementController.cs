@@ -8,12 +8,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Intex2.Controllers
 {
+    // RBAC functionality can only be accessed by admin users
     [Authorize(Roles = "Administrator")]
     public class UserRoleManagementController : Controller
     {
+        // Brings in the usermanager and rolemanager tools
         private readonly UserManager<ApplicationUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
 
+        // Constructs the RBAC controller with above tools
         public UserRoleManagementController(UserManager<ApplicationUser> userManager,
                                             RoleManager<IdentityRole> roleManager)
         {
@@ -21,6 +24,7 @@ namespace Intex2.Controllers
             this.roleManager = roleManager;
         }
 
+        // Displays basic RBAC page
         [HttpGet]
         public IActionResult Index()
         {
@@ -29,6 +33,7 @@ namespace Intex2.Controllers
             return View(users);
         }
 
+        // Displays details about users
         [HttpGet]
         public async Task<IActionResult> Details(string userId)
         {
@@ -39,17 +44,19 @@ namespace Intex2.Controllers
 
             ViewBag.UserName = user.UserName;
 
+            // Get roles associated with user
             var userRoles = await userManager.GetRolesAsync(user);
 
             return View(userRoles);
         }
 
+        // Displays the add role page, where additional roles can be created
         [HttpGet]
         public IActionResult AddRole()
         {
             return RedirectToAction(nameof(DisplayRoles));
         }
-
+        // Handles creation of new roles
         [HttpPost]
         public async Task<IActionResult> AddRole(string role)
         {
@@ -58,7 +65,7 @@ namespace Intex2.Controllers
             await roleManager.CreateAsync(new IdentityRole(role));
             return RedirectToAction(nameof(DisplayRoles));
         }
-
+        // Displays all available roles
         [HttpGet]
         public IActionResult DisplayRoles()
         {
@@ -67,7 +74,7 @@ namespace Intex2.Controllers
 
             return View(roles);
         }
-
+        // Displays screen where users can be added to roles
         [HttpGet]
         public IActionResult AddUserToRole()
         {
@@ -81,7 +88,7 @@ namespace Intex2.Controllers
             ViewBag.Roles = new SelectList(roles, "Name", "Name");
             return View();
         }
-
+        // Handles associating users with roles
         [HttpPost]
         public async Task<IActionResult> AddUserToRole(UserRole userRole)
         {
@@ -95,7 +102,7 @@ namespace Intex2.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
+        // Displays the remove user role page, removes user role
         [HttpGet]
         public async Task<IActionResult> RemoveUserRole(string role, string userName)
         {
@@ -109,7 +116,7 @@ namespace Intex2.Controllers
 
             return RedirectToAction(nameof(Details), new { userId = user.Id });
         }
-
+        // Displays roles, deletes a role
         [HttpGet]
         public async Task<IActionResult> RemoveRole(string role)
         {

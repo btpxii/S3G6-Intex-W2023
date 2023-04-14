@@ -7,24 +7,24 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Establishes connections to databases
 var authConnectionString = builder.Configuration.GetConnectionString("AuthenticationConnection");
 var dataConnectionString = builder.Configuration.GetConnectionString("MummiesConnection");
-
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(authConnectionString));
-
 builder.Services.AddDbContext<MummiesDbContext>(options =>
     options.UseNpgsql(dataConnectionString));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+// Sets ApplicationUser, extension of IdentityUser, as default identity
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddRazorPages();
 
+// Configures Hsts (didn't really work)
 builder.Services.AddHsts(options =>
 {
     options.Preload = true;
@@ -32,12 +32,14 @@ builder.Services.AddHsts(options =>
     options.MaxAge = TimeSpan.FromDays(60);
 });
 
+// Attempt to fix Hsts above, suspected an issue with header forwarding through ELB
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
     options.ForwardedHeaders =
         ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
 });
 
+// Establishes cookie policy
 builder.Services.Configure<CookiePolicyOptions>(options =>
 {
     // This lambda determines whether user consent for non-essential 
@@ -47,6 +49,7 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
     options.MinimumSameSitePolicy = SameSiteMode.Strict;
 });
 
+// Sets password requirements
 builder.Services.Configure<IdentityOptions>(options =>
 {
     options.Password.RequireDigit = true;
@@ -61,15 +64,17 @@ builder.Services.Configure<IdentityOptions>(options =>
 builder.Services.AddControllersWithViews();
 
 #region Authorization
-
+// Adds authorization to app, allowing serverside denial of resources based on RBAC
 AddAuthorizationPolicies();
 
 #endregion
 
+// Configures repository pattern
 builder.Services.AddScoped<IIntex2Repository, EFIntex2Repository>();
 
 var app = builder.Build();
 
+// Another attempt to forward headers for HSTS
 app.UseForwardedHeaders();
 
 // Configure the HTTP request pipeline.
@@ -81,13 +86,17 @@ else
 {
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    app.UseHsts(); // Still didn't work
 }
 
+// Sets up app to forward :80 traffic to :443 (not needed I think because I closed port 80 on my server
 app.UseHttpsRedirection();
+// Allows serving static files
 app.UseStaticFiles();
+// Enables cookie policy
 app.UseCookiePolicy();
 
+// Adds all kinds of headers for security, this is how I got HSTS working
 app.Use(async (ctx, next) =>
 {
     // I have to enable unsafe-inline for style-src and script-src to allow the change email functionality to work properly. I fully understand the vulnerability that this exposes, and in a real-world situation I would research further to understand how I can have both security and functionality.
@@ -103,10 +112,14 @@ app.Use(async (ctx, next) =>
     await next();
 });
 
+// Enables routing
 app.UseRouting();
 
+// Sets up app to use authentication and authorization
 app.UseAuthentication();
 app.UseAuthorization();
+
+// Maps endpoints for various views
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
@@ -133,6 +146,7 @@ app.MapRazorPages();
 
 app.Run();
 
+// Creates authorization policies
 void AddAuthorizationPolicies()
 {
     builder.Services.AddAuthorization(options =>

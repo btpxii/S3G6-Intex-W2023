@@ -10,13 +10,12 @@ using System;
 
 namespace Intex2.Infrastructure
 {
+    // Establish target element
     [HtmlTargetElement("div", Attributes = "page-model")]
     public class PaginationTagHelper : TagHelper
     {
-        //dynamically create the page links for us
-
         private IUrlHelperFactory uhf;
-
+        // bring in useful tools for urls
         public PaginationTagHelper(IUrlHelperFactory temp)
         {
             uhf = temp;
@@ -37,13 +36,14 @@ namespace Intex2.Infrastructure
             IUrlHelper uh = uhf.GetUrlHelper(vc);
 
             TagBuilder final = new TagBuilder("div");
-
+            // builds a page button for each page in pagination system
             for (int i = 1; i <= PageModel.TotalPages; i++)
             {
                 TagBuilder tb = new TagBuilder("a");
-
+                // checks for filters before building links
                 if (PageFilter != null)
                 {
+                    // adds filter to link if applicable
                     if (PageFilter.SelectedArea != "Area" ||
                        PageFilter.SelectedBnum != "Burial Number" ||
                        PageFilter.SelectedDage != "Age at Death" ||
@@ -73,6 +73,7 @@ namespace Intex2.Infrastructure
                         });
                     }
                     else
+                    // builds normal page link
                     {
                         tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i });
                     }
@@ -81,16 +82,16 @@ namespace Intex2.Infrastructure
                 {
                     tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i });
                 }
-                // NOTE WE MAY NEED TO CHANGE TO ACCOMODATE FOR FILTERING
-
+                // applies proper css
                 if (PageClassEnabled)
                 {
                     tb.AddCssClass(PageClass);
                     tb.AddCssClass(i == PageModel.CurrentPage ? PageClassSelected : PageClassNormal);
                 }
                 tb.AddCssClass(PageClass);
+                // adds text to element
                 tb.InnerHtml.Append(i.ToString());
-
+                // adds to collection of elements
                 final.InnerHtml.AppendHtml(tb);
             }
 

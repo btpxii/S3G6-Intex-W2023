@@ -6,7 +6,7 @@ namespace Intex2.Components
     public class NSViewComponent : ViewComponent
     {
 
-
+        // View component that builds the ns filter for buriallist
         private IIntex2Repository repo { get; set; }
         public NSViewComponent(IIntex2Repository temp)
         {
@@ -15,7 +15,7 @@ namespace Intex2.Components
 
         public IViewComponentResult Invoke()
         {
-
+            // Filters NS down to distinct, non-null values
             var NS = repo.Burialmains
                 .Where(x => !string.IsNullOrWhiteSpace(x.Northsouth))
                 .Select(x => x.Northsouth)

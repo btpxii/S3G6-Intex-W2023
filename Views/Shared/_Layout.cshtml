@@ -16,6 +16,7 @@
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            @*builds navbar*@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
@@ -30,12 +31,14 @@
                     <li class="nav-item">
                         <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Visualization">Visualization</a>
                     </li>
+                    @*user only sees RBAC portal if they are already an admin*@
                     @if (User.IsInRole("Administrator"))
                     {
                     <li class="nav-item">
                         <a class="nav-link text-light" asp-area="" asp-controller="UserRoleManagement" asp-action="Index">Manage User Roles</a>
                     </li>
                     }
+                    @*adds links for logging in/out*@
                     <partial name="_LoginPartial" />
                 </ul>
             </div>

@@ -6,7 +6,7 @@ namespace Intex2.Components
     public class SEWViewComponent : ViewComponent
     {
 
-
+        // View component that builds the SEW filter for buriallist
         private IIntex2Repository repo { get; set; }
         public SEWViewComponent(IIntex2Repository temp)
         {
@@ -14,8 +14,8 @@ namespace Intex2.Components
         }
 
         public IViewComponentResult Invoke()
-        { 
-
+        {
+            // Filters SEW down to distinct, non-null values
             var SEW = repo.Burialmains
                 .Where(x => !string.IsNullOrWhiteSpace(x.Squareeastwest))
                 .Select(x => x.Squareeastwest)

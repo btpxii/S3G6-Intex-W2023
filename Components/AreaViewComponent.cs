@@ -5,7 +5,7 @@ namespace Intex2.Components
 {
     public class AreaViewComponent : ViewComponent
     {
-
+        // View component that builds the area filter for buriallist
         private IIntex2Repository repo { get; set; }
         public AreaViewComponent(IIntex2Repository temp)
         {
@@ -14,7 +14,7 @@ namespace Intex2.Components
 
         public IViewComponentResult Invoke()
         {
-
+            // Filters areas down to distinct, non-null values
             var area = repo.Burialmains
                 .Where(x => !string.IsNullOrWhiteSpace(x.Area))
                 .Select(x => x.Area)

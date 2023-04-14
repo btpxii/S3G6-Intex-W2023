@@ -13,28 +13,30 @@ namespace Intex2.Controllers
     public class HomeController : Controller
     {
         private IIntex2Repository repo;
-
+        // Constructs the home controller with the abstracted db connection through a repository
         public HomeController(IIntex2Repository temp)
         {
             repo = temp;
         }
-
+        // Displays the landing page
         public IActionResult Index()
         {
             return View();
         }
-
+        // Displays the privacy policy
         public IActionResult Privacy()
         {
             return View();
         }
-
+        // Displays the burial list page, handles filtering and pagination
         public IActionResult BurialList (string area, string bnum, string dage, string depth, string direction, string ew, string hair, string ns, string sew, string sex, string sns, int pageNum = 1)
         {
+            // allows 10 burial records per page
             int pageSize = 10;
 
             var x = new BurialsViewModel
             {
+                // filters, paginates results from burialmains table
                 Burialmains = repo.Burialmains
                     .Where(b =>
                         (area == null || b.Area == area) &&
@@ -50,6 +52,7 @@ namespace Intex2.Controllers
                         (sns == null || b.Squarenorthsouth == sns))
                     .Skip((pageNum - 1) * pageSize)
                     .Take(pageSize),
+                // sets page info to be used by the pagination tag helpers
                 PageInfo = new PageInfo
                 {
                     TotalNumBurials =
@@ -74,6 +77,7 @@ namespace Intex2.Controllers
                 }
             };
 
+            // Sets viewbag data, used by the filter components
             ViewBag.SelectedArea = string.IsNullOrEmpty(area) ? "Area" : area;
             ViewBag.SelectedBnum = string.IsNullOrEmpty(bnum) ? "Burial Number" : bnum;
             ViewBag.SelectedDage = string.IsNullOrEmpty(dage) ? "Age at Death" : dage;
@@ -89,6 +93,7 @@ namespace Intex2.Controllers
             return View(x);
         }
 
+        // Displays burialdetails page, an extension of each burial record
         [HttpGet]
         public IActionResult BurialDetail(string burialnumber)
         {
@@ -101,13 +106,14 @@ namespace Intex2.Controllers
             return View(burial);
         }
 
+        // Displays the edit burial page, can only be accessed by permitted users
         [Authorize(Roles = "Researcher, Administrator")]
         public IActionResult BurialEdit (long burialId)
         {
             var burial = repo.Burialmains.Where(x => x.Id == burialId).FirstOrDefault();
             return View(burial);
         }
-
+        // Displays the delete burial page, can only be accessed by permitted users
         [Authorize(Roles = "Researcher, Administrator")]
         public IActionResult BurialDelete()
         {

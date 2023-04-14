@@ -1,5 +1,6 @@
 ﻿namespace Intex2.Core
 {
+    // Didn't implement, but constants to use in place of strings when referencing roles
     public static class Constants
     {
         public static class Roles

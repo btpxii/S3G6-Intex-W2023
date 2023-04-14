@@ -6,7 +6,7 @@ namespace Intex2.Components
     public class HairViewComponent : ViewComponent
     {
 
-
+        // View component that builds the hair filter for buriallist
         private IIntex2Repository repo { get; set; }
         public HairViewComponent(IIntex2Repository temp)
         {
@@ -16,7 +16,7 @@ namespace Intex2.Components
         public IViewComponentResult Invoke()
         {
 
-
+            // Filters hair down to distinct, non-null values
             var hair = repo.Burialmains
                 .Where(x => !string.IsNullOrWhiteSpace(x.Haircolor))
                 .Select(x => x.Haircolor)

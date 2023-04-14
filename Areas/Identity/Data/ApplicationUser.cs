@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Intex2.Areas.Identity.Data
 {
+    // Class that extends the default identity user, adds name attributes
     public class ApplicationUser : IdentityUser
     {
         public string FirstName { get; set; }
