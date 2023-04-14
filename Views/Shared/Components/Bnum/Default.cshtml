@@ -1,0 +1,25 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<string>
+<form asp-controller="Home" asp-action="BurialList" method="get">
+    <select name="bnum" onchange="this.form.submit()">
+        <option value="">Burial Number</option>
+        @foreach (string t in Model)
+        {
+            
+            if (ViewBag.SelectedBnum == t)
+            {
+                <option value="@t" selected>@t</option>
+            }
+            else
+            {
+                <option value="@t">@t</option>
+            }
+            
+        }
+    </select>
+
+</form>
