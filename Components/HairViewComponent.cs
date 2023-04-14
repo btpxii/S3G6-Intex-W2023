@@ -18,6 +18,7 @@ namespace Intex2.Components
 
 
             var hair = repo.Burialmains
+                .Where(x => !string.IsNullOrWhiteSpace(x.Haircolor))
                 .Select(x => x.Haircolor)
                 .Distinct()
                 .OrderBy(x => x);

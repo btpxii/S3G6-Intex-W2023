@@ -17,6 +17,7 @@ namespace Intex2.Components
 
 
             var EW = repo.Burialmains
+                .Where(x => !string.IsNullOrWhiteSpace(x.Eastwest))
                 .Select(x => x.Eastwest)
                 .Distinct()
                 .OrderBy(x => x);

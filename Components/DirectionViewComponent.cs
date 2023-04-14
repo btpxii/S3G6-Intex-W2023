@@ -16,6 +16,7 @@ namespace Intex2.Components
         {
 
             var direction = repo.Burialmains
+                .Where(x => !string.IsNullOrWhiteSpace(x.Headdirection))
                 .Select(x => x.Headdirection)
                 .Distinct()
                 .OrderBy(x => x);

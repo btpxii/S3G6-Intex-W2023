@@ -18,6 +18,7 @@ namespace Intex2.Components
 
 
             var dage = repo.Burialmains
+                .Where(x => !string.IsNullOrWhiteSpace(x.Ageatdeath))
                 .Select(x => x.Ageatdeath)
                 .Distinct()
                 .OrderBy(x => x);

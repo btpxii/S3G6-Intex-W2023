@@ -17,6 +17,7 @@ namespace Intex2.Components
         {
 
             var SNS = repo.Burialmains
+                .Where(x => !string.IsNullOrWhiteSpace(x.Squarenorthsouth))
                 .Select(x => x.Squarenorthsouth)
                 .Distinct()
                 .OrderBy(x => x);

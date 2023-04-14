@@ -17,6 +17,7 @@ namespace Intex2.Components
 
 
             var bnum = repo.Burialmains
+                .Where(x => !string.IsNullOrWhiteSpace(x.Burialnumber))
                 .Select(x => x.Burialnumber)
                 .Distinct()
                 .OrderBy(x => x);

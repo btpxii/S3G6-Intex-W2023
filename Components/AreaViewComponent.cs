@@ -16,6 +16,7 @@ namespace Intex2.Components
         {
 
             var area = repo.Burialmains
+                .Where(x => !string.IsNullOrWhiteSpace(x.Area))
                 .Select(x => x.Area)
                 .Distinct()
                 .OrderBy(x => x);

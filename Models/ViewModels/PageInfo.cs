@@ -7,6 +7,6 @@
         public int CurrentPage { get; set; }
         //num of pages we need
 
-        public int TotalPages => (int)Math.Ceiling((double)TotalNumBurials / BurialsPerPage);
+        public int TotalPages => (int) Math.Ceiling((double) TotalNumBurials / BurialsPerPage);
     }
 }

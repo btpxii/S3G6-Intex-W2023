@@ -17,6 +17,7 @@ namespace Intex2.Components
 
 
             var depth = repo.Burialmains
+                .Where(x => !string.IsNullOrWhiteSpace(x.Depth))
                 .Select(x => x.Depth)
                 .Distinct()
                 .OrderBy(x => x);

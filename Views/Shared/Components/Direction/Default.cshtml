@@ -1,7 +1,7 @@
 ﻿@{
 }
 @model IEnumerable<string>
-<form asp-controller="Home" asp-action="BurialList" method="get">
+<form asp-controller="Home" asp-action="BurialList" asp-route-pageNum="1" method="get">
     <select name="direction" onchange="this.form.submit()">
         <option value="">Direction</option>
         @foreach (string t in Model)

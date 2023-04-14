@@ -3,10 +3,11 @@
 }
 
 @model BurialsViewModel
+
 <div class="container">
     <div class="row m-1 p-1">
         <div class="col-md-3 col-lg-2">
-            <div id="headDirection">Filter</div>
+            <div>Filter By</div>
             <vc:direction></vc:direction>
             <vc:bnum></vc:bnum>
             <vc:dage></vc:dage>
@@ -18,17 +19,18 @@
             <vc:sew></vc:sew>
             <vc:sex></vc:sex>
             <vc:sns></vc:sns>
+            <a asp-controller="Home" asp-action="BurialList" asp-route-pageNum="1" class="btn btn-dark separate-button">Remove Filter</a>
         </div>
         <div class="col-9 col-lg-10">
             @foreach (Burialmain b in Model.Burialmains)
             {
                 <partial name="_BurialSummaryPartial" model="b" />
-
             }
         </div>
     </div>
 </div>
 
-<div page-blah="@Model.PageInfo" page-action="BurialList" page-class="btn"
+
+<div page-model="@Model.PageInfo" page-action="BurialList" page-filter="@ViewBag" page-class="btn"
      page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
      page-class-enabled=true class="btn group pull-right m-1"></div>

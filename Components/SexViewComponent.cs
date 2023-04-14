@@ -17,6 +17,7 @@ namespace Intex2.Components
         {
 
             var sex = repo.Burialmains
+                .Where(x => !string.IsNullOrWhiteSpace(x.Sex))
                 .Select(x => x.Sex)
                 .Distinct()
                 .OrderBy(x => x);

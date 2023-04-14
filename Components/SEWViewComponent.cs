@@ -17,6 +17,7 @@ namespace Intex2.Components
         { 
 
             var SEW = repo.Burialmains
+                .Where(x => !string.IsNullOrWhiteSpace(x.Squareeastwest))
                 .Select(x => x.Squareeastwest)
                 .Distinct()
                 .OrderBy(x => x);
