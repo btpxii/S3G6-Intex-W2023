@@ -59,6 +59,10 @@ footer {
     justify-content: center;
 }
 
-input, button {
+.separate-formelement {
+    margin-bottom: 5px;
+}
+.separate-button {
+    margin-top: 15px;
     margin-bottom: 15px;
 }
