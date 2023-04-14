@@ -1,19 +1,30 @@
 ﻿@{
     ViewData["Title"] = "Visualization";
 }
-<header class="py-5 image-container">
-    <img src="~/img/Unsupervised.png" style="width:2000px; height: 700px" class="img-fluid" alt="Unsupervised">
+
+<header class="py-5 bg-dark">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center text-white display-4">Cluster Analysis Results</h1>
+            </div>
+        </div>
+    </div>
 </header>
+
 <section class="py-5">
     <div class="container my-5">
         <div class="row justify-content-center">
-            <p>
-                The presented graphic showcases our cluster analysis results, which provide insights into the burial practices of mummies over time. Specifically,
-                the plot depicts the relationship between grave length and depth, where depth serves as a chronological indicator. By comparing the distribution of
-                grave lengths across different depths, we can identify trends in burial practices. Notably, the clusters colored in yellow indicate the prevalence
-                of shorter graves, and their sparsity in the central region suggests two distinct periods of time in which shorter graves were more common. This
-                observation may indicate variations in burial customs or a societal factor, such as a disease with a greater impact on the mortality of children than adults.
-            </p>
+            <div class="col-md-8">
+                <div class="card">
+                    <img src="~/img/Unsupervised.png" class="card-img-top img-fluid" alt="Unsupervised">
+                    <div class="card-body">
+                        <p class="card-text">
+                            The presented graphic showcases our cluster analysis results, which provide insights into the burial practices of mummies over time. Specifically, the plot depicts the relationship between grave length and depth, where depth serves as a chronological indicator. By comparing the distribution of grave lengths across different depths, we can identify trends in burial practices. Notably, the clusters colored in yellow indicate the prevalence of shorter graves, and their sparsity in the central region suggests two distinct periods of time in which shorter graves were more common. This observation may indicate variations in burial customs or a societal factor, such as a disease with a greater impact on the mortality of children than adults.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
