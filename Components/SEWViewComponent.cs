@@ -3,26 +3,27 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Intex2.Components
 {
-    public class DageViewComponent : ViewComponent
+    public class SEWViewComponent : ViewComponent
     {
 
+
         private IIntex2Repository repo { get; set; }
-        public DageViewComponent(IIntex2Repository temp)
+        public SEWViewComponent(IIntex2Repository temp)
         {
             repo = temp;
         }
 
         public IViewComponentResult Invoke()
-        {
+        { 
 
-
-
-            var dage = repo.Burialmains
-                .Select(x => x.Ageatdeath)
+            var SEW = repo.Burialmains
+                .Select(x => x.Squareeastwest)
                 .Distinct()
                 .OrderBy(x => x);
 
-            return View(dage);
+            return View(SEW);
         }
+
+
     }
 }

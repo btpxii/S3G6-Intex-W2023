@@ -3,11 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Intex2.Components
 {
-    public class DageViewComponent : ViewComponent
+    public class NSViewComponent : ViewComponent
     {
 
+
         private IIntex2Repository repo { get; set; }
-        public DageViewComponent(IIntex2Repository temp)
+        public NSViewComponent(IIntex2Repository temp)
         {
             repo = temp;
         }
@@ -15,14 +16,14 @@ namespace Intex2.Components
         public IViewComponentResult Invoke()
         {
 
-
-
-            var dage = repo.Burialmains
-                .Select(x => x.Ageatdeath)
+            var NS = repo.Burialmains
+                .Select(x => x.Northsouth)
                 .Distinct()
                 .OrderBy(x => x);
 
-            return View(dage);
+            return View(NS);
         }
+
+
     }
 }

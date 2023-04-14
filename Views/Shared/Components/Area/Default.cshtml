@@ -1,13 +1,14 @@
-﻿@{
+﻿
+@{
 }
 @model IEnumerable<string>
 <form asp-controller="Home" asp-action="BurialList" method="get">
-    <select name="hair" onchange="this.form.submit()">
-        <option value="">Hair</option>
+    <select name="area" onchange="this.form.submit()">
+        <option value="">Area</option>
         @foreach (string t in Model)
         {
             
-            if (ViewBag.SelectedHair == t)
+            if (ViewBag.SelectedBnum == t)
             {
                 <option value="@t" selected>@t</option>
             }

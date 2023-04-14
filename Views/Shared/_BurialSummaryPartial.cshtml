@@ -8,14 +8,18 @@
             @Model.Id
         </h4>
     </div>
-    <div class="card-text p-1">Sex: @Model.Sex</div>
+    <div class="card-text p-1">Area: @Model.Area</div>
+    <div class="card-text p-1">Burial Number: @Model.Burialnumber</div>
+    <div class="card-text p-1">Age at Death: @Model.Ageatdeath</div>
     <div class="card-text p-1">Depth: @Model.Depth</div>
-    <div class="card-text p-1">Age at Death: @Model.Ageatdeath</div>
-    <div class="card-text p-1">Hair Color: @Model.Haircolor</div>
-    <div class="card-text p-1">Date of Excavation: @Model.Dateofexcavation</div>
     <div class="card-text p-1">Head Direction: @Model.Headdirection</div>
-    <div class="card-text p-1">Age at Death: @Model.Ageatdeath</div>
-    <form method="post" asp-page="/Single">
+    <div class="card-text p-1">East West: @Model.Eastwest</div>
+    <div class="card-text p-1">Hair Color: @Model.Haircolor</div>
+    <div class="card-text p-1">North South: @Model.Northsouth</div>
+    <div class="card-text p-1">Square East West: @Model.Squareeastwest</div>
+    <div class="card-text p-1">Sex: @Model.Sex</div>
+    <div class="card-text p-1">Square North South: @Model.Squarenorthsouth</div>
+    <form method="post" asp-controller="Home" asp-action="BurialDetail">
         <input type="hidden" asp-for="@Model.Id" />
         <span class="card-text">
             <button type="submit" class="btn btn-success btn-sm float-end">View</button>

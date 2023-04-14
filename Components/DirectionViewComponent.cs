@@ -14,7 +14,6 @@ namespace Intex2.Components
 
         public IViewComponentResult Invoke()
         {
-            ViewBag.SelectedDirection = RouteData?.Values["direction"];
 
             var direction = repo.Burialmains
                 .Select(x => x.Headdirection)
@@ -22,8 +21,6 @@ namespace Intex2.Components
                 .OrderBy(x => x);
 
             return View(direction);
-
         }
-
     }
 }
