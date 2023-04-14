@@ -15,7 +15,7 @@ namespace Intex2.Components
 
         public IViewComponentResult Invoke()
         {
-            ViewBag.SelectedDirection = RouteData?.Values["hair"];
+
 
             var hair = repo.Burialmains
                 .Select(x => x.Haircolor)

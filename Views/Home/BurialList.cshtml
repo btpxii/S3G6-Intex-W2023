@@ -3,20 +3,30 @@
 }
 
 @model BurialsViewModel
-<div class="row m-1 p-1">
-    <div id="headDirection" class="col-3">FILTER</div>
-    <vc:direction></vc:direction>
-    <vc:dage></vc:dage>
-    <vc:hair></vc:hair>
-</div>
+<div class="container">
+    <div class="row m-1 p-1">
+        <div class="col-md-3 col-lg-2">
+            <div id="headDirection">Filter</div>
+            <vc:direction></vc:direction>
+            <vc:bnum></vc:bnum>
+            <vc:dage></vc:dage>
+            <vc:depth></vc:depth>
+            <vc:area></vc:area>
+            <vc:ew></vc:ew>
+            <vc:hair></vc:hair>
+            <vc:ns></vc:ns>
+            <vc:sew></vc:sew>
+            <vc:sex></vc:sex>
+            <vc:sns></vc:sns>
+        </div>
+        <div class="col-9 col-lg-10">
+            @foreach (Burialmain b in Model.Burialmains)
+            {
+                <partial name="_BurialSummaryPartial" model="b" />
 
-<div class="col-9"></div>
-<div>
-    @foreach (Burialmain b in Model.Burialmains)
-    {
-        <partial name="_BurialSummaryPartial" model="b" />
-
-    }
+            }
+        </div>
+    </div>
 </div>
 
 <div page-blah="@Model.PageInfo" page-action="BurialList" page-class="btn"

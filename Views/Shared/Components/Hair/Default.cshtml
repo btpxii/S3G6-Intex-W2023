@@ -1,15 +1,22 @@
 ﻿@{
 }
 @model IEnumerable<string>
-
-<a asp-controller="Home" asp-action="BurialList" asp-rotue-hair="">Burial Home List</a>
 <form asp-controller="Home" asp-action="BurialList" method="get">
     <select name="hair" onchange="this.form.submit()">
-        <option value="">All Hair Colors</option>
+        <option value="">Hair</option>
         @foreach (string t in Model)
         {
-            <option value="@t">@t</option>
+            
+            if (ViewBag.SelectedHair == t)
+            {
+                <option value="@t" selected>@t</option>
+            }
+            else
+            {
+                <option value="@t">@t</option>
+            }
+            
         }
-
     </select>
+
 </form>

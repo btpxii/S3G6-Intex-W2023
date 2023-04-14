@@ -14,7 +14,8 @@ namespace Intex2.Components
 
         public IViewComponentResult Invoke()
         {
-            ViewBag.SelectedDage = RouteData?.Values["dage"];
+
+
 
             var dage = repo.Burialmains
                 .Select(x => x.Ageatdeath)

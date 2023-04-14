@@ -1,14 +1,22 @@
 ﻿@{
 }
 @model IEnumerable<string>
-
 <form asp-controller="Home" asp-action="BurialList" method="get">
     <select name="dage" onchange="this.form.submit()">
-        <option value="">All Death Ages</option>
+        <option value="">Age at Death</option>
         @foreach (string t in Model)
         {
-            <option value="@t">@t</option>
-        }
 
+            if (ViewBag.SelectedDage == t)
+            {
+                <option value="@t" selected>@t</option>
+            }
+            else
+            {
+                <option value="@t">@t</option>
+            }
+
+        }
     </select>
+
 </form>
