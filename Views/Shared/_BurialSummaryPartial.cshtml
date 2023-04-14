@@ -1,6 +1,5 @@
 ﻿@{
 }
-
 @model Burialmain
 <div class="card card-outline-primary m-1 p-1">
     <div class="bg-faded p-1">
@@ -19,12 +18,11 @@
     <div class="card-text p-1">Square East West: @Model.Squareeastwest</div>
     <div class="card-text p-1">Sex: @Model.Sex</div>
     <div class="card-text p-1">Square North South: @Model.Squarenorthsouth</div>
-    <form method="post" asp-controller="Home" asp-action="BurialDetail">
-        <input type="hidden" asp-for="@Model.Id" />
+    <form method="get" asp-controller="Home" asp-action="BurialDetail">
+        <input type="hidden" asp-for="@Model.Burialnumber" />
         <span class="card-text">
-            <button type="submit" class="btn btn-success btn-sm float-end">View</button>
+            <button type="submit" class="btn btn-success btn-sm float-end">View Details</button>
         </span>
     </form>
 </div>
-
 <br />

@@ -1,9 +1,54 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
 }
+<style>
+    table {
+        width: 100%;
+        height: 100%;
+    }
 
-@model Burialmain
+        table.table-bordered {
+            width: 100%;
+            height: 100%;
+        }
 
-<h1>@Model.Id</h1>
+        table td {
+            font-size: 18px;
+            padding: 10px;
+        }
+</style>
+@model Intex2.Models.Burialmain
+<form method="get">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Area</th>
+                <th>Burial Number</th>
+                <th>Age at Death</th>
+                <th>Depth</th>
+                <th>Head Direction</th>
+                <th>East West</th>
+                <th>Hair Color</th>
+                <th>North South</th>
+                <th>Square East West</th>
+                <th>Sex</th>
+                <th>Square North South</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Area</td>
+                <td>@Model.Burialnumber</td>
+                <td>@Model.Ageatdeath</td>
+                <td>@Model.Depth</td>
+                <td>@Model.Headdirection</td>
+                <td>@Model.Eastwest</td>
+                <td>@Model.Haircolor</td>
+                <td>@Model.Northsouth</td>
+                <td>@Model.Squareeastwest</td>
+                <td>@Model.Sex</td>
+                <td>@Model.Squarenorthsouth</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="@Url.Action("BurialList", "Home")" class="btn btn-primary">Return to Burial List</a>
+</form>

@@ -110,17 +110,14 @@ app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
-        name: "directionpage",
-        pattern: "{direction}/Page{pageNum}",
+        name: "BurialsPagination",
+        pattern: "Home/BurialList/{pageNum}",
         defaults: new { Controller = "Home", action = "BurialList" });
     endpoints.MapControllerRoute(
-        name: "Paging",
-        pattern: "Home/BurialList/{pageNum}",
-        defaults: new { Controller = "Home", action = "BurialList", pageNum = 1 });
-    //endpoints.MapControllerRoute(
-    //    name: "direction",
-    //    pattern: "{direction}",
-    //    defaults: new { Controller = "Home", action = "BurialList" });
+        name: "BurialsFilterPagination",
+        pattern: "Home/BurialList/{pageNum}/{slug}",
+        defaults: new { Controller = "Home", action = "BurialList" });
+
 
     endpoints.MapDefaultControllerRoute();
 
@@ -128,9 +125,7 @@ app.UseEndpoints(endpoints =>
 
 
 });
-//app.MapControllerRoute(
-//    name: "default",
-//    pattern: "{controller=Home}/{action=Index}/{id?}");
+
 app.MapRazorPages();
 
 app.Run();

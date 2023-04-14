@@ -1,3 +1,77 @@
 ﻿@{
     ViewData["Title"] = "Prediction";
 }
+<div class="container">
+    <form method="post">
+        <div class="mb-3">
+            <label for="SNS" class="form-label">Square North South :</label>
+            <input id="SNS" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label for="depth" class="form-label">Depth:</label>
+            <input id="depth" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label for="direction" class="form-label">Head Direction:</label>
+            <select id="direction" class="form-select">
+                <option value="" selected></option>
+                <option value="headdirection_">headdirection_</option>
+                <option value="headdirection_E">headdirection_E</option>
+                <option value="headdirection_I">headdirection_I</option>
+                <option value="headdirection_N_LL">headdirection_N_LL</option>
+                <option value="headdirection_W">headdirection_W</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="adult" class="form-label">Adult Status:</label>
+            <select id="adult" class="form-select">
+                <option value="" selected></option>
+                <option value="adultsubadult_">adultsubadult_</option>
+                <option value="adultsubadult_A">adultsubadult_A</option>
+                <option value="adultsubadult_C">adultsubadult_C</option>
+                <option value="adultsubadult_N_LL">adultsubadult_N_LL</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="material" class="form-label">Material:</label>
+            <select id="material" class="form-select">
+                <option value="material_None" selected></option>
+                <option value="material_Linen">material_Linen</option>
+                <option value="material_Linen_(background)">material_Linen_(background)</option>
+                <option value="material_Linen_(red)">material_Linen_(red)</option>
+                <option value="material_Linen_(very_loosely_spun)">material_Linen_(very_loosely_spun)</option>
+                <option value="material_Other">material_Other</option>
+                <option value="material_Other_(burlap)">material_Other_(burlap)</option>
+                <option value="material_Wool">material_Wool</option>
+                <option value="material_Wool_(tapestry)">material_Wool_(tapestry)</option>
+                <option value="material_Wool_thread">material_Wool_thread</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="ply" class="form-label">Ply:</label>
+            <select id="ply" class="form-select">
+                <option value="ply_None" selected></option>
+                <option value="ply_1">ply_1</option>
+                <option value="ply_2">ply_2</option>
+                <option value="ply_D">ply_D</option>
+                <option value="ply_S">ply_S</option>
+             </select>
+        </div>
+        <div class="mb-3">
+            <label for="NS" class="form-label">North South: </label>
+            <select for="NS" class="form-select separate-formelement">
+                <option value="" selected></option>
+                <option value="ns_N">ns_N</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="EW" class="form-label">East West: </label>
+            <select for="EW" class="form-select separate-formelement">
+                <option value="ew_None" selected></option>
+                <option value="ew_E">ew_E</option>
+                <option value="ew_W ">ew_W </option>
+            </select>
+        </div>
+        <button type="submit" class="w-100 btn btn-lg btn-primary separate-button">Predict</button>
+    </form>
+</div>
